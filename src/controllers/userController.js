@@ -53,6 +53,7 @@ class UserController {
             console.log(`Error: ${error.message}`);
             res.status(404).json({ message: error.message });
         }
+        
     }
 
     static async searchUsers(req, res) {

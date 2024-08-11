@@ -170,13 +170,21 @@ class UserService {
 
   static async searchUsersByName(name) {
     try {
-      const users = await User.findByName(name);
-      return users;
+      const users = await User.find(
+        { name: { $regex: name, $options: 'i' } },
+        'name profilePicture' // Sélectionnez seulement ces champs
+      ).limit(10); // Limitez le nombre de résultats si nécessaire
+  
+      return users.map(user => ({
+        _id: user._id,
+        name: user.name,
+        profilePicture: user.profilePicture
+      }));
     } catch (error) {
       throw new DatabaseError(`Search failed: ${error.message}`);
-    }
   }
 
+}
 }
 
 export default UserService;
