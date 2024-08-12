@@ -23,12 +23,18 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             properties:
- *               username:
+ *               name:
  *                 type: string
  *               email:
  *                 type: string
  *               password:
  *                 type: string
+ *               type:
+ *                  type: string
+ *               
+ * 
+ *   
+ *               
  *     responses:
  *       200:
  *         description: Utilisateur créé avec succès
@@ -199,7 +205,7 @@ router.get('/profile/:id', authMiddleware, UserController.getUserProfileById);
  *           schema:
  *             type: object
  *             properties:
- *               reportedUserId:
+ *               reportedId:
  *                 type: string
  *               reason:
  *                 type: string
@@ -379,7 +385,7 @@ router.patch('/notifications/:id', authMiddleware, NotificationController.markAs
  *           schema:
  *             type: object
  *             properties:
- *               recipientId:
+ *               userId:
  *                 type: string
  *               message:
  *                 type: string

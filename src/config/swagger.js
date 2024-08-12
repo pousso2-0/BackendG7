@@ -14,6 +14,7 @@ const options = {
         url: `https://backendg7.onrender.com`,
         description: 'Serveur de développement',
       },
+      
     ],
     components: {
       securitySchemes: {
