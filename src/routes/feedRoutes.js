@@ -6,7 +6,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/posts:
+ * /api/feed:
  *   get:
  *     summary: Récupérer le fil d'actualité complet
  *     tags: [Feeds]
@@ -18,11 +18,11 @@ const router = express.Router();
  *       401:
  *         description: Non autorisé, authentification requise
  */
-router.get('/', authMiddleware, FeedController.getUserFeed);
+router.get('/feed', authMiddleware, FeedController.getUserFeed);
 
 /**
  * @swagger
- * /api/posts/follow:
+ * /api/feed/follow:
  *   get:
  *     summary: Récupérer uniquement les posts et partages des utilisateurs suivis
  *     tags: [Feeds]

@@ -53,8 +53,33 @@ class UserController {
             console.log(`Error: ${error.message}`);
             res.status(404).json({ message: error.message });
         }
-        
     }
+
+
+    static async buyCredits(req, res) {
+        try {
+          const { amount } = req.body;
+          const userId = req.userId;
+          const updatedUser = await UserService.buyCredits(userId, amount);
+          res.json({ credits: updatedUser.credits });
+        } catch (error) {
+          res.status(400).json({ message: error.message });
+        }
+      }
+    
+      static async upgradeToPremi3um(req, res) {
+        try {
+          const userId = req.userId;
+          const updatedUser = await UserService.upgradeToPremi3um(userId);
+          res.json({ 
+            subscriptionType: updatedUser.subscriptionType,
+            premiumExpiresAt: updatedUser.premiumExpiresAt,
+            credits: updatedUser.credits
+          });
+        } catch (error) {
+          res.status(400).json({ message: error.message });
+        }
+      }
 
     static async searchUsers(req, res) {
         try {

@@ -1,3 +1,4 @@
+
 // src/services/userService.js
 import bcrypt from "bcrypt";
 import Validator from "../utils/Validator.js";
@@ -92,6 +93,54 @@ class UserService {
     }
   }
 
+  static async updateCredits(userId, amount) {
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $inc: { credits: amount } },
+      { new: true }
+    );
+    if (!user) throw new ValidationError("User not found");
+    return user;
+  }
+
+  static async upgradeToPremi3um(userId) {
+    const premiumExpiresAt = new Date();
+    premiumExpiresAt.setMonth(premiumExpiresAt.getMonth() + 1);
+
+    const user = await User.findById(userId);
+    if (!user) throw new ValidationError("User not found");
+
+    if (user.credits < PREMIUM_COST) {
+      throw new ValidationError("Not enough credits to upgrade to premium");
+    }
+
+    user.subscriptionType = 'premium';
+    user.premiumExpiresAt = premiumExpiresAt;
+    user.credits = user.credits - PREMIUM_COST + PREMIUM_DEFAULT_CREDITS;
+
+    await user.save();
+
+    return user;
+  }
+
+  static async checkAndUpdatePremi3umStatus(userId) {
+    const user = await User.findById(userId);
+    if (!user) throw new ValidationError("User not found");
+
+    if (user.subscriptionType === 'premium' && user.premiumExpiresAt < new Date()) {
+      user.subscriptionType = 'free';
+      user.premiumExpiresAt = null;
+      await user.save();
+    }
+
+    return user;
+  }
+
+  static async buyCredits(userId, amount) {
+    const creditsToBuy = Math.floor(amount / 100); // 1 crédit = 100F CFA
+    return this.updateCredits(userId, creditsToBuy);
+  }
+
   static async updateUser(id, updateData) {
     const validationResult = Validator.validateUserData(updateData);
     if (validationResult.error) {
@@ -182,9 +231,9 @@ class UserService {
       }));
     } catch (error) {
       throw new DatabaseError(`Search failed: ${error.message}`);
+    }
   }
 
-}
 }
 
 export default UserService;

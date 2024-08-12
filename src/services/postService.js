@@ -1,28 +1,31 @@
 // src/services/postService.js
 import Post from "../models/Post.js";
 import User from "../models/User.js";
+import UserService from "./userService.js";
 import { ValidationError, DatabaseError } from "../errors/customErrors.js";
 
 class PostService {
   static async createPost(userId, postData) {
-    try {
-      const user = await User.findById(userId);
-      if (!user) {
-        throw new ValidationError("User not found");
+    const user = await UserService.checkAndUpdatePremi3umStatus(userId);
+
+    if (user.subscriptionType === 'free') {
+      if (postData.media.length > 3) {
+        throw new ValidationError("Free users can only post up to 3 media items");
       }
-
-      const newPost = await Post.create({
-        userId,
-        ...postData
-      });
-
-      // Mettre à jour le nombre de posts de l'utilisateur
-      await User.findByIdAndUpdate(userId, { $inc: { postsCount: 1 } });
-
-      return newPost;
-    } catch (error) {
-      throw new DatabaseError(`Failed to create post: ${error.message}`);
+      if (user.credits < 3) {
+        throw new ValidationError("Not enough credits to create a post");
+      }
+      await UserService.updateCredits(userId, -3);
     }
+
+    const newPost = await Post.create({
+      userId,
+      ...postData
+    });
+
+    await User.findByIdAndUpdate(userId, { $inc: { postsCount: 1 } });
+
+    return newPost;
   }
 
   static async getPostById(postId) {

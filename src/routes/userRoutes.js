@@ -4,6 +4,8 @@ import followController from '../controllers/followController.js';
 import VoteController from '../controllers/voteController.js';
 import reportController from '../controllers/reportController.js';
 import NotificationController from '../controllers/notificationController.js';
+import MesureController from '../controllers/mesureController.js';
+
 import { authMiddleware } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
@@ -222,7 +224,7 @@ router.post('/report', authMiddleware, reportController.reportUser);
  *           schema:
  *             type: object
  *             properties:
- *               followedUserId:
+ *               followingId:
  *                 type: string
  *     responses:
  *       200:
@@ -233,7 +235,7 @@ router.post('/follow', authMiddleware, followController.followUser);
 /**
  * @swagger
  * /api/users/unfollow:
- *   delete:
+ *   post:
  *     summary: Ne plus suivre un utilisateur
  *     tags: [Follows]
  *     security:
@@ -245,13 +247,13 @@ router.post('/follow', authMiddleware, followController.followUser);
  *           schema:
  *             type: object
  *             properties:
- *               unfollowedUserId:
+ *               unfollowingId:
  *                 type: string
  *     responses:
  *       200:
  *         description: Utilisateur non suivi
  */
-router.delete('/unfollow', authMiddleware, followController.unfollowUser);
+router.post('/unfollow', authMiddleware, followController.unfollowUser);
 
 /**
  * @swagger
@@ -413,5 +415,129 @@ router.post('/notifications', authMiddleware, NotificationController.sendNotific
  *         description: Aucun utilisateur trouvé
  */
 router.get('/search', authMiddleware, UserController.searchUsers);
+/**
+ * @swagger
+ * /api/users/buy-credits:
+ *   post:
+ *     summary: Acheter des crédits pour l'utilisateur connecté
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               amount:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Crédits achetés avec succès
+ *       400:
+ *         description: Données invalides ou erreur de traitement
+ */
+router.post('/buy-credits', authMiddleware, UserController.buyCredits);
+
+/**
+ * @swagger
+ * /api/users/upgrade-to-premium:
+ *   post:
+ *     summary: Passer à un abonnement Premium
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               paymentMethod:
+ *                 type: string
+ *                 description: Méthode de paiement utilisée pour l'upgrade
+ *     responses:
+ *       200:
+ *         description: Mise à niveau vers Premium réussie
+ *       400:
+ *         description: Erreur lors de la mise à niveau ou données invalides
+ */
+router.post('/upgrade-to-premium', authMiddleware, UserController.upgradeToPremi3um);
+
+/**
+ * @swagger
+ * /api/users/mesure:
+ *   post:
+ *     summary: Créer ou mettre à jour une mesure pour l'utilisateur connecté
+ *     tags: [Mesures]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               mesureId:
+ *                 type: string
+ *                 description: ID de la mesure (si mise à jour)
+ *               mesureData:
+ *                 type: object
+ *                 description: Données de la mesure à créer ou mettre à jour
+ *     responses:
+ *       200:
+ *         description: Mesure créée ou mise à jour avec succès
+ *       400:
+ *         description: Données invalides
+ */
+router.post('/mesure', authMiddleware, MesureController.createOrUpdateMesure);
+
+/**
+ * @swagger
+ * /api/users/mesures:
+ *   get:
+ *     summary: Récupérer les mesures de l'utilisateur connecté
+ *     tags: [Mesures]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Liste des mesures récupérées
+ *       404:
+ *         description: Aucune mesure trouvée
+ */
+router.get('/mesures', authMiddleware, MesureController.getMesure);
+
+/**
+ * @swagger
+ * /api/users/delMesure:
+ *   delete:
+ *     summary: Supprimer une mesure de l'utilisateur connecté
+ *     tags: [Mesures]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               mesureId:
+ *                 type: string
+ *                 description: ID de la mesure à supprimer
+ *     responses:
+ *       200:
+ *         description: Mesure supprimée avec succès
+ *       400:
+ *         description: Données invalides ou mesure non trouvée
+ */
+router.delete('/delMesure', authMiddleware, MesureController.deleteMesure);
+
+
 
 export default router;
+

@@ -21,10 +21,10 @@ class followController {
 
    static async unfollowUser(req, res) {
     try {
-        const followerId = req.userId;
-        const {followingId} = req.body;
+        const unfollowerId = req.userId;
+        const {unfollowingId} = req.body;
         
-      const unfollow = await FollowService.unfollowUser(followerId, followingId);
+      const unfollow = await FollowService.unfollowUser(unfollowerId, unfollowingId);
 
       res.status(200).json({ message: 'User unfollowed successfully', unfollow });
     } catch (error) {

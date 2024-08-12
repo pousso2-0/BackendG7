@@ -17,6 +17,9 @@ const userSchema = new mongoose.Schema({
   followersCount: { type: Number, default: 0 },
   followingCount: { type: Number, default: 0 },
   postsCount: { type: Number, default: 0 },
+  credits: { type: Number, default: 30 },
+  subscriptionType: { type: String, enum: ['free', 'premium'], default: 'free' },
+  premiumExpiresAt: { type: Date },
   interests: [String],
   skills: [String],
   isPrivate: { type: Boolean, default: false },
@@ -41,15 +44,6 @@ userSchema.methods.comparePassword = async function(candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };
 
-// userSchema.statics.create = async function(userData) {
-//   const existingUser = await this.findOne({ email: userData.email });
-//   console.log("Creating user")
-//   if (existingUser) {
-//     throw new Error('Email already in use. Please choose another one');
-//   }
-//   console.log("existingUser: " + existingUser)
-//   return this.create(userData);
-// };
 
 userSchema.statics.findById = function(id) {
   return this.findOne({ _id: id });

@@ -11,7 +11,7 @@ const options = {
     },
     servers: [
       {
-        url: `http://localhost:${process.env.PORT || 5000}`,
+        url: `https://backendg7.onrender.com`,
         description: 'Serveur de développement',
       },
     ],
@@ -36,3 +36,5 @@ const options = {
 const specs = swaggerJsdoc(options);
 
 export { swaggerUi, specs };
+
+

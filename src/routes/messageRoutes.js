@@ -19,7 +19,7 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             properties:
- *               recipientId:
+ *               receiverId :
  *                 type: string
  *                 description: ID du destinataire
  *               content:
