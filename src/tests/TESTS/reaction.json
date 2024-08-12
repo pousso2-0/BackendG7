@@ -1,0 +1,81 @@
+{
+    "info": {
+      "name": "Reaction API Tests",
+      "description": "Collection de tests pour l'API de réactions",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Ajouter ou supprimer une réaction",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer {{authToken}}", 
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "http://localhost:3000/api/reactions",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "reactions"]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n\t\"reactionType\": \"like\",\n\t\"postId\": \"{{postId}}\"\n}" 
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Récupérer toutes les réactions pour un post",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer {{authToken}}", 
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "http://localhost:3000/api/reactions/posts/{{postId}}",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "reactions", "posts", "{{postId}}"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Récupérer toutes les réactions pour un commentaire",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer {{authToken}}",  
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "http://localhost:3000/api/reactions/comments/{{commentId}}",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "reactions", "comments", "{{commentId}}"]
+          }
+        },
+        "response": []
+      }
+    ]
+  }
+  

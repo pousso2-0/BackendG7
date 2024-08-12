@@ -1,0 +1,168 @@
+{
+    "endpoints": [
+      {
+        "name": "Register",
+        "method": "POST",
+        "url": "/api/users/register",
+        "body": {
+          "name": "John Doe",
+          "email": "john@example.com",
+          "password": "securePassword123",
+          "type": "client",
+          "profilePicture": "https://example.com/profile.jpg",
+          "bio": "I'm a new user",
+          "location": "New York",
+          "gender": "male",
+          "phone": "+1234567890",
+          "skills": ["sewing", "design"]
+        },
+        "comment": "Utilisez ce JSON pour créer un nouvel utilisateur"
+      },
+      {
+        "name": "Login",
+        "method": "POST",
+        "url": "/api/users/login",
+        "body": {
+          "email": "john@example.com",
+          "password": "securePassword123"
+        },
+        "comment": "Utilisez ces identifiants pour vous connecter"
+      },
+      {
+        "name": "Logout",
+        "method": "POST",
+        "url": "/api/users/logout",
+        "body": {},
+        "comment": "Pas de body nécessaire, mais incluez le token JWT dans le header Authorization"
+      },
+      {
+        "name": "Update User",
+        "method": "PUT",
+        "url": "/api/users/{id}",
+        "body": {
+          "name": "John Updated",
+          "bio": "I've updated my profile",
+          "location": "Los Angeles"
+        },
+        "comment": "Remplacez {id} dans l'URL par l'ID de l'utilisateur à mettre à jour"
+      },
+      {
+        "name": "Delete User",
+        "method": "DELETE",
+        "url": "/api/users/{id}",
+        "body": {},
+        "comment": "Remplacez {id} dans l'URL par l'ID de l'utilisateur à supprimer"
+      },
+      {
+        "name": "Get All Users",
+        "method": "GET",
+        "url": "/api/users/",
+        "body": {},
+        "comment": "Pas de body nécessaire"
+      },
+      {
+        "name": "Get Current User Profile",
+        "method": "GET",
+        "url": "/api/users/profile",
+        "body": {},
+        "comment": "Pas de body nécessaire, mais incluez le token JWT dans le header Authorization"
+      },
+      {
+        "name": "Get User Profile by ID",
+        "method": "GET",
+        "url": "/api/users/profile/{id}",
+        "body": {},
+        "comment": "Remplacez {id} dans l'URL par l'ID de l'utilisateur dont vous voulez voir le profil"
+      },
+      {
+        "name": "Report User",
+        "method": "POST",
+        "url": "/api/users/report",
+        "body": {
+          "reportedUserId": "userId_here",
+          "reason": "Inappropriate behavior"
+        },
+        "comment": "Remplacez userId_here par l'ID de l'utilisateur que vous voulez signaler"
+      },
+      {
+        "name": "Follow User",
+        "method": "POST",
+        "url": "/api/users/follow",
+        "body": {
+          "followedUserId": "userId_here"
+        },
+        "comment": "Remplacez userId_here par l'ID de l'utilisateur que vous voulez suivre"
+      },
+      {
+        "name": "Unfollow User",
+        "method": "DELETE",
+        "url": "/api/users/unfollow",
+        "body": {
+          "unfollowedUserId": "userId_here"
+        },
+        "comment": "Remplacez userId_here par l'ID de l'utilisateur que vous ne voulez plus suivre"
+      },
+      {
+        "name": "Get Followers",
+        "method": "GET",
+        "url": "/api/users/follower",
+        "body": {},
+        "comment": "Pas de body nécessaire, mais incluez le token JWT dans le header Authorization"
+      },
+      {
+        "name": "Get Following",
+        "method": "GET",
+        "url": "/api/users/following",
+        "body": {},
+        "comment": "Pas de body nécessaire, mais incluez le token JWT dans le header Authorization"
+      },
+      {
+        "name": "Vote for Tailor",
+        "method": "POST",
+        "url": "/api/users/vote",
+        "body": {
+          "tailorId": "tailorUserId_here",
+          "rating": 4
+        },
+        "comment": "Remplacez tailorUserId_here par l'ID du tailleur pour lequel vous votez"
+      },
+      {
+        "name": "Get Tailor Rating",
+        "method": "GET",
+        "url": "/api/users/{id}/vote",
+        "body": {},
+        "comment": "Remplacez {id} dans l'URL par l'ID du tailleur dont vous voulez voir la note"
+      },
+      {
+        "name": "Get Notifications",
+        "method": "GET",
+        "url": "/api/users/notifications",
+        "body": {},
+        "comment": "Pas de body nécessaire, mais incluez le token JWT dans le header Authorization"
+      },
+      {
+        "name": "Mark Notification as Read",
+        "method": "PATCH",
+        "url": "/api/users/notifications/{id}",
+        "body": {},
+        "comment": "Remplacez {id} dans l'URL par l'ID de la notification à marquer comme lue"
+      },
+      {
+        "name": "Send Notification",
+        "method": "POST",
+        "url": "/api/users/notifications",
+        "body": {
+          "recipientId": "userId_here",
+          "message": "You have a new message"
+        },
+        "comment": "Remplacez userId_here par l'ID de l'utilisateur à qui vous voulez envoyer une notification"
+      },
+      {
+        "name": "Search Users",
+        "method": "GET",
+        "url": "/api/users/search?q=John",
+        "body": {},
+        "comment": "Pas de body nécessaire, mais ajoutez le paramètre de requête 'q' dans l'URL"
+      }
+    ]
+  }

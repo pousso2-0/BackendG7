@@ -7,6 +7,7 @@ import compression from 'compression';
 import cors from 'cors';
 import connectDB from './config/database.js'; 
 import configureRoutes from './routes/index.js';
+import { swaggerUi, specs } from './config/swagger.js';
 
 const app = express();
 
@@ -19,6 +20,9 @@ app.use(cors());
 
 // Configuration des routes
 configureRoutes(app);
+
+// Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 // Middleware de gestion des erreurs
 app.use(errorHandler);
@@ -34,8 +38,6 @@ process.on('unhandledRejection', (reason, promise) => {
   process.exit(1);
 });
 
-
-
 // Fonction de démarrage du serveur
 const startServer = async () => {
     try {
@@ -45,6 +47,7 @@ const startServer = async () => {
   
       app.listen(PORT, () => {
         logger.info(`Server is running on port ${PORT}`);
+        logger.info(`Swagger documentation available at http://localhost:${PORT}/api-docs`);
       });
     } catch (error) {
       logger.error('Failed to start server:', error);

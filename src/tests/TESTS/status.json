@@ -1,0 +1,67 @@
+{
+    "endpoints": [
+      {
+        "name": "Create Status",
+        "method": "POST",
+        "url": "/api/status",
+        "body": {
+          "content": "This is a test status",
+          "media": {
+            "type": "photo",
+            "url": "https://example.com/photo.jpg"
+          },
+          "expiresAt": "2024-08-13T00:00:00.000Z"
+        },
+        "comment": "Creates a new status. Requires authentication. The body should contain 'content' (text of the status), optional 'media' (type and URL), and optional 'expiresAt' (expiration date)."
+      },
+      {
+        "name": "View Status",
+        "method": "GET",
+        "url": "/api/status/{{statusId}}",
+        "body": {},
+        "comment": "Retrieves a specific status by its ID. This also marks the status as viewed by the authenticated user if they haven't viewed it before. Requires authentication and a valid status ID."
+      },
+      {
+        "name": "Delete Status",
+        "method": "DELETE",
+        "url": "/api/status/del/{{statusId}}",
+        "body": {},
+        "comment": "Deletes a specific status. Only the owner of the status can delete it. Requires authentication and a valid status ID."
+      },
+      {
+        "name": "Get User Statuses",
+        "method": "GET",
+        "url": "/api/status/all?page=1&limit=10",
+        "body": {},
+        "comment": "Retrieves all statuses for the authenticated user. Supports pagination with 'page' and 'limit' query parameters. Requires authentication."
+      },
+      {
+        "name": "Send Message to Status",
+        "method": "POST",
+        "url": "/api/status/message",
+        "body": {
+          "statusId": "{{statusId}}",
+          "messageContent": "This is a test message for the status"
+        },
+        "comment": "Sends a message in response to a specific status. The message will be sent to the owner of the status. Requires authentication, a valid status ID, and message content."
+      }
+    ],
+    "variables": [
+      {
+        "key": "baseUrl",
+        "value": "http://localhost:3000",
+        "comment": "The base URL of your API. Change this if your API is hosted elsewhere."
+      },
+      {
+        "key": "authToken",
+        "value": "your_auth_token_here",
+        "comment": "Authentication token. Replace with a valid token before running tests."
+      },
+      {
+        "key": "statusId",
+        "value": "example_status_id",
+        "comment": "ID of a status. Replace with a valid status ID when testing specific status operations."
+      }
+    ]
+  }
+  

@@ -1,0 +1,125 @@
+{
+    "endpoints": [
+      {
+        "name": "Create Post",
+        "method": "POST",
+        "url": "/api/posts",
+        "body": {
+          "content": "Ceci est le contenu de mon nouveau post",
+          "media": [
+            {
+              "type": "photo",
+              "url": "https://example.com/image.jpg"
+            }
+          ],
+          "isPublic": true,
+          "commentsEnabled": true
+        },
+        "comment": "Créer un nouveau post (uniquement pour les tailleurs). Nécessite un token JWT dans le header Authorization."
+      },
+      {
+        "name": "Get All Posts",
+        "method": "GET",
+        "url": "/api/posts",
+        "body": {},
+        "comment": "Obtenir tous les posts. Pas besoin d'authentification."
+      },
+      {
+        "name": "Get Specific Post",
+        "method": "GET",
+        "url": "/api/posts/{id}",
+        "body": {},
+        "comment": "Obtenir un post spécifique par son ID. Remplacez {id} par l'ID du post."
+      },
+      {
+        "name": "Update Post",
+        "method": "PUT",
+        "url": "/api/posts/{id}",
+        "body": {
+          "content": "Ceci est le contenu mis à jour de mon post",
+          "isPublic": false
+        },
+        "comment": "Mettre à jour un post (uniquement pour les tailleurs). Remplacez {id} par l'ID du post. Nécessite un token JWT dans le header Authorization."
+      },
+      {
+        "name": "Delete Post",
+        "method": "DELETE",
+        "url": "/api/posts/{id}",
+        "body": {},
+        "comment": "Supprimer un post (uniquement pour les tailleurs). Remplacez {id} par l'ID du post. Nécessite un token JWT dans le header Authorization."
+      },
+      {
+        "name": "Get User Posts",
+        "method": "GET",
+        "url": "/api/posts/user/{userId}",
+        "body": {},
+        "comment": "Obtenir tous les posts d'un utilisateur spécifique. Remplacez {userId} par l'ID de l'utilisateur."
+      },
+      {
+        "name": "Share Post",
+        "method": "POST",
+        "url": "/api/posts/retweet",
+        "body": {
+          "postId": "postIdHere"
+        },
+        "comment": "Partager un post. Remplacez postIdHere par l'ID du post à partager. Nécessite un token JWT dans le header Authorization."
+      },
+      {
+        "name": "Add to Favorites",
+        "method": "POST",
+        "url": "/api/posts/favorites",
+        "body": {
+          "postId": "postIdHere"
+        },
+        "comment": "Ajouter un post aux favoris. Remplacez postIdHere par l'ID du post à ajouter aux favoris. Nécessite un token JWT dans le header Authorization."
+      },
+      {
+        "name": "Get User Shares",
+        "method": "GET",
+        "url": "/api/posts/retweets",
+        "body": {},
+        "comment": "Obtenir les posts partagés par l'utilisateur. Nécessite un token JWT dans le header Authorization."
+      },
+      {
+        "name": "Get User Favorites",
+        "method": "GET",
+        "url": "/api/posts/favorites/f",
+        "body": {},
+        "comment": "Obtenir les posts favoris de l'utilisateur. Nécessite un token JWT dans le header Authorization."
+      },
+      {
+        "name": "Test Endpoint",
+        "method": "POST",
+        "url": "/api/posts/test",
+        "body": {
+          "testData": "Ceci est une donnée de test"
+        },
+        "comment": "Point de terminaison de test (démonstration). Nécessite un token JWT dans le header Authorization."
+      },
+      {
+        "name": "Share Post (Alternative)",
+        "method": "POST",
+        "url": "/api/posts/share",
+        "body": {
+          "postId": "postIdHere"
+        },
+        "comment": "Partager un post (méthode alternative). Remplacez postIdHere par l'ID du post à partager. Nécessite un token JWT dans le header Authorization."
+      },
+      {
+        "name": "Remove from Favorites",
+        "method": "DELETE",
+        "url": "/api/posts/favorites/{id}",
+        "body": {},
+        "comment": "Supprimer un post des favoris. Remplacez {id} par l'ID du post à supprimer des favoris. Nécessite un token JWT dans le header Authorization."
+      },
+      {
+        "name": "Record View",
+        "method": "POST",
+        "url": "/api/posts/view",
+        "body": {
+          "postId": "postIdHere"
+        },
+        "comment": "Enregistrer la vue d'un post. Remplacez postIdHere par l'ID du post dont enregistrer la vue. Nécessite un token JWT dans le header Authorization."
+      }
+    ]
+  }
