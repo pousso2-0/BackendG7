@@ -26,12 +26,18 @@ const isTailor = roleMiddleware(['tailleur']);
  *           schema:
  *             type: object
  *             properties:
- *               title:
- *                 type: string
- *                 description: Titre du post
  *               content:
  *                 type: string
  *                 description: Contenu du post
+ *               media:
+ *                 type: array
+ *                 description: Contenu image ou video du post
+ *               isPublic:
+ *                 type: boolean
+ *                 description: si le post est public ou privé
+ *               commentsEnabled:
+ *                 type: boolean
+ *                 description: si les commentaire du post seront desactiver ou pas 
  *     responses:
  *       201:
  *         description: Post créé avec succès
