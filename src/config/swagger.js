@@ -11,7 +11,7 @@ const options = {
     },
     servers: [
       {
-        url: `https://backendg7-mqwx.onrender.com`,
+        url: `https://threadly.onrender.com`,
         description: 'Serveur de développement',
       },
       
