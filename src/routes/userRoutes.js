@@ -34,7 +34,7 @@ const router = express.Router();
  *                 description: Mot de passe de l'utilisateur
  *               type:
  *                 type: string
- *                 description: Type d'utilisateur (ex. : "admin", "client", etc.)
+ *                 description: Type d'utilisateur 
  *               profilePicture:
  *                 type: string
  *                 format: uri
