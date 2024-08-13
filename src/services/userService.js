@@ -174,7 +174,7 @@ class UserService {
   static async getUserProfile(userId) {
     const user = await this.getUserById(userId);
     if (!user) {
-      throw new ValidationError("User not found");
+      throw new ValidationError("User not found2");
     }
 
     // Récupérez les posts de l'utilisateur (vous devez définir comment récupérer les posts)
@@ -186,6 +186,7 @@ class UserService {
 
     // Créez l'objet de profil
     const profile = {
+      credits: user.credits,
       id: user.id,
       name: user.name,
       email: user.email,
