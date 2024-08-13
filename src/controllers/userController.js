@@ -136,18 +136,7 @@ class UserController {
             if (profile.isPrivate = true) {
                 return res.status(403).json({ message: "Private profile" });
             }
-            res.json({
-                id: profile.id,
-                name: profile.name,
-                type: profile.type,
-                bio: profile.bio,
-                location: profile.location,
-                gender: profile.gender,
-                posts: profile.posts,
-                postCount: profile.postCount,
-                followersCount: profile.followersCount,
-                followingCount: profile.followingCount,
-            });
+            res.json({profile});
         } catch (error) {
             res.status(404).json({ message: error.message });
         }

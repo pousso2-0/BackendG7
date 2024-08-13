@@ -45,7 +45,7 @@ userSchema.methods.comparePassword = async function(candidatePassword) {
 };
 
 
-userSchema.statics.findById = function(id) {
+userSchema.statics.findById = function(id) {œ
   return this.findOne({ _id: id });
 };
 
