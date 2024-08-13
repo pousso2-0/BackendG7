@@ -245,7 +245,7 @@ router.post('/report', authMiddleware, reportController.reportUser);
  *     tags: [Follows]
  *     security:
  *       - bearerAuth: []
- *     requestBody:
+ *     requestBody:œ
  *       required: true
  *       content:
  *         application/json:
