@@ -11,7 +11,7 @@ const options = {
     },
     servers: [
       {
-        url: `https://backendg7.onrender.com`,
+        url: `https://backendg7-jhgt.onrender.com/`,
         description: 'Serveur de développement',
       },
       
