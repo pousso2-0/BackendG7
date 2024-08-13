@@ -7,8 +7,8 @@ import NotificationController from '../controllers/notificationController.js';
 import MesureController from '../controllers/mesureController.js';
 
 import { authMiddleware } from '../middleware/authMiddleware.js';
-
 const router = express.Router();
+
 /**
  * @swagger
  * /api/users/register:
@@ -63,6 +63,7 @@ const router = express.Router();
  *         description: Données invalides
  */
 router.post('/register', UserController.register);
+
 
 /**
  * @swagger
