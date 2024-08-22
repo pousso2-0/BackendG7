@@ -33,7 +33,7 @@ const router = express.Router();
  *       404:
  *         description: Destinataire non trouvé
  */
-router.post('/', authMiddleware, MessageController.sendMessage);
+router.post('/mes', authMiddleware, MessageController.sendMessage);
 
 /**
  * @swagger
